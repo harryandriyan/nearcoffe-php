@@ -36,8 +36,8 @@ $app->get(
     function ($type,$q,$lat,$lng) use ($app) {
       require_once("Slim/Helper/FoursquareApi.php");
       // Set your client key and secret
-      $client_key = "M33DNHK3R4QGNPB400UBE34BPOG0PCLOYEF31CBI2LTDKILB";
-      $client_secret = "EYQHX40USOTMXRKDJKXWVTWEHDRV2KLJ4QXPJ4ZGSV1IEXMK";
+      $client_key = "YOUR_CLIENT_KEY";
+      $client_secret = "YOUR_CLIENT_SECRET";
 
       $foursquare = new FoursquareApi($client_key,$client_secret);
       
@@ -57,8 +57,8 @@ $app->get(
     function ($id) use ($app) {
       require_once("Slim/Helper/FoursquareApi.php");
       // Set your client key and secret
-      $client_key = "M33DNHK3R4QGNPB400UBE34BPOG0PCLOYEF31CBI2LTDKILB";
-      $client_secret = "EYQHX40USOTMXRKDJKXWVTWEHDRV2KLJ4QXPJ4ZGSV1IEXMK";
+      $client_key = "YOUR_CLIENT_KEY";
+      $client_secret = "YOUR_CLIENT_SECRET";
 
       $foursquare = new FoursquareApi($client_key,$client_secret);
       
