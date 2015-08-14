@@ -1,0 +1,66 @@
+<div ng-controller="MoreDetailCtrl">
+	<div class="content-heading">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-lg-push-3 col-sm-10 col-sm-push-1">
+					<h1 class="heading">{{venue.name}}</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content-inner" ng-controller="MoreDetailCtrl">
+	<div class="container container-full">
+		<div class="row row-fix">
+			<div class="col-md-3 content-fix">
+				<div class="content-fix-scroll">
+					<div class="content-fix-wrap">
+						<div class="content-fix-inner">
+							<h2 class="content-sub-heading">Maps</h2>
+							<div class="tile-wrap">
+								<div id="map" style="height: 300px !important;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<h2 class="content-sub-heading">Description</h2>
+				<p><span ng-repeat="category in venue.categories" class="light-green darken-4-text">{{category.name}}, </span> <br></p>
+				<p>{{venue.location.address}}, {{venue.location.city}}, {{venue.location.country}}</p>
+				<p>Total Visitors : {{venue.stats.usersCount}} Total Visits : {{venue.stats.visitsCount}}</p>
+				<span >Phone : {{venue.contact.formattedPhone}} </span><br>
+		    	<span >Twitter : <a href="https://twitter.com/{{venue.contact.twitter}}" target="_blank">@{{venue.contact.twitter}}</a> </span>
+		    	<p>
+		    		<a class="btn btn-alt waves-button waves-effect waves-green" href="http://maps.google.com/maps?daddr={{venue.location.lat}},{{venue.location.lng}}" target="_blank">Get Direction</a>
+		    	</p>
+		    	<p>
+		    		{{venue.description}}
+		    	</p>
+			</div>
+			<div class="col-md-3 content-fix">
+				<div class="content-fix-scroll">
+					<div class="content-fix-wrap">
+						<div class="content-fix-inner">
+							<h2 class="content-sub-heading">Images</h2>
+							<ul ng-repeat="photos in venue.photos.groups">
+								<li ng-repeat="photo in photos.items">
+									<img ng-src="{{photo.prefix}}180{{photo.suffix}}" alt="{{photo.user.firstName}}" title="{{photo.user.firstName}}">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="fbtn-container left">
+	<div class="fbtn-inner">
+		<a class="fbtn fbtn-red fbtn-lg" data-toggle="dropdown"><span class="fbtn-text">Links</span><span class="fbtn-ori icon">open_in_new</span><span class="fbtn-sub icon">close</span></a>
+		<div class="fbtn-dropdown">
+			<a class="fbtn fbtn-blue" href=""><span class="fbtn-text">Save</span><span class="fa fa-save"></span></a>
+			<a class="fbtn fbtn-blue" href="{{venue.canonicalUrl}}" target="_blank"><span class="fbtn-text">View on Foursquare</span><span class="fa fa-foursquare"></span></a>
+		</div>
+	</div>
+</div>

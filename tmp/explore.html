@@ -1,0 +1,75 @@
+<div class="content-heading">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-lg-push-3 col-sm-10 col-sm-push-1">
+				<h1 class="heading">Explore</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content-inner" ng-controller="ExploreCtrl" ng-show="loading">
+	<div class="container">
+		<div class="row" align="center">
+			<div class="progress">
+				<div class="load-bar">
+					<div class="load-bar-base">
+						<div class="load-bar-content">
+							<div class="load-bar-progress"></div>
+							<div class="load-bar-progress load-bar-progress-alt"></div>
+							<div class="load-bar-progress load-bar-progress-purple"></div>
+							<div class="load-bar-progress load-bar-progress-red"></div>
+						</div>
+					</div>
+				</div>
+				<div class="load-bar">
+					<div class="load-bar-base">
+						<div class="load-bar-content">
+							<div class="load-bar-progress"></div>
+							<div class="load-bar-progress load-bar-progress-red"></div>
+							<div class="load-bar-progress load-bar-progress-purple"></div>
+							<div class="load-bar-progress load-bar-progress-alt"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content-inner" ng-controller="ExploreCtrl">
+	<div class="container">
+		<div class="row">
+			<div class="tile-wrap" ng-repeat="venue in venues">
+				<div class="tile tile-collapse" ng-repeat="recomended in venue.items">
+					<div class="tile-toggle" data-target="#tile-collapse-{{$index+1}}" data-toggle="tile">
+						<div class="pull-left tile-side">
+							<div ng-if="recomended.venue.hours.isOpen" class="avatar avatar-green avatar-md">
+								<span>Open</span>
+							</div>
+							<div ng-if="!recomended.venue.hours.isOpen" class="avatar avatar-red avatar-md">
+								<span>Close</span>
+							</div>
+						</div>
+						<div class="tile-action" data-ignore="tile">
+							<!-- additional action -->
+						</div>
+						<div class="tile-inner">
+							<div class="text-overflow">{{recomended.venue.name}}</div>
+						</div>
+					</div>
+					<div class="tile-active-show collapse" id="tile-collapse-{{$index+1}}">
+						<div class="tile-sub">
+							<p>{{recomended.venue.location.address}} {{recomended.venue.location.city}} {{recomended.venue.location.country}}<br><small>{{recomended.venue.location.distance}} meters from here </small></p>
+						</div>
+						<div class="tile-footer">
+							<ul class="nav nav-list pull-left">
+								<li>
+									<a href="#/more/{{recomended.venue.id}}"><span class="icon">check</span>&nbsp;View Detail</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
