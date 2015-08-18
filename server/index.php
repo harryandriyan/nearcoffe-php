@@ -8,6 +8,7 @@
  * If you are using Composer, you can skip this step.
  */
 require 'Slim/Slim.php';
+require_once 'near_config.php';
 
 \Slim\Slim::registerAutoloader();
 
@@ -34,10 +35,11 @@ $app = new \Slim\Slim();
 $app->get(
     '/venues/:type/:q/:lat/:lng',
     function ($type,$q,$lat,$lng) use ($app) {
+      global $near_config;
       require_once("Slim/Helper/FoursquareApi.php");
       // Set your client key and secret
-      $client_key = "YOUR_CLIENT_KEY";
-      $client_secret = "YOUR_CLIENT_SECRET";
+      $client_key = $near_config['client_key'];
+      $client_secret = $near_config['client_secret'];
 
       $foursquare = new FoursquareApi($client_key,$client_secret);
       
@@ -55,10 +57,11 @@ $app->get(
 $app->get(
     '/venue/:id',
     function ($id) use ($app) {
+      global $near_config;
       require_once("Slim/Helper/FoursquareApi.php");
       // Set your client key and secret
-      $client_key = "YOUR_CLIENT_KEY";
-      $client_secret = "YOUR_CLIENT_SECRET";
+      $client_key = $near_config['client_key'];
+      $client_secret = $near_config['client_secret'];
 
       $foursquare = new FoursquareApi($client_key,$client_secret);
       
