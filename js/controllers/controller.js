@@ -4,8 +4,18 @@ NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope) {
 
 });
 
-NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope) { 
-
+NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $location, $http, Data) { 
+	$scope.login = {};
+    $scope.doLogin = function (customer) {
+        Data.post('login', {
+            customer: customer
+        }).then(function (results) {
+            Data.toast(results);
+            if (results.status == "success") {
+                $location.path('home');
+            }
+        });
+    };
 });
 
 NearCoffeeAppCtrl.controller('RegisterCtrl', function ($scope) { 
