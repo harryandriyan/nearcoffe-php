@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-lg-push-3 col-sm-10 col-sm-push-1">
-				<h1 class="heading">Sign In</h1>
+				<h1 class="heading">Login</h1>
 			</div>
 		</div>
 	</div>
@@ -15,8 +15,8 @@
 					<fieldset>
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
-								<label class="floating-label" for="float-username">Username</label>
-								<input class="form-control" id="username" ng-model="username" type="text">
+								<label class="floating-label" for="float-email">Email</label>
+								<input class="form-control" id="email" ng-model="login.email" type="text">
 							</div>
 						</div>
 					</fieldset>
@@ -24,14 +24,15 @@
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
 								<label class="floating-label" for="float-password">Password</label>
-								<input class="form-control" id="pasword" ng-model="pasword" type="text">
+								<input class="form-control" id="pasword" ng-model="login.password" type="password">
 							</div>
 						</div>
 					</fieldset>
 					<fieldset>
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
-								<a ng-click="dologin()" class="btn btn-alt waves-button waves-effect waves-light">Search</a>
+								<a ng-click="doLogin(login)" class="btn btn-alt waves-button waves-effect waves-light">Login</a>
+								<a href="#/register">Don't have an account ? Register</a>
 							</div>
 						</div>
 					</fieldset>
