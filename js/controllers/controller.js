@@ -4,6 +4,13 @@ NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope) {
 
 });
 
+NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope) { 
+
+});
+
+NearCoffeeAppCtrl.controller('RegisterCtrl', function ($scope) { 
+
+});
 
 NearCoffeeAppCtrl.controller('SearchCtrl', function ($scope, $http) {
 	$scope.getVenues = function(lat,lng){
