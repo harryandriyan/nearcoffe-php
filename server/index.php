@@ -8,7 +8,7 @@
  * If you are using Composer, you can skip this step.
  */
 require 'Slim/Slim.php';
-require_once 'near_config.php';
+
 
 \Slim\Slim::registerAutoloader();
 
@@ -22,60 +22,49 @@ require_once 'near_config.php';
  */
 $app = new \Slim\Slim();
 
-/**
- * Step 3: Define the Slim application routes
- *
- * Here we define several Slim application routes that respond
- * to appropriate HTTP request methods. In this example, the second
- * argument for `Slim::get`, `Slim::post`, `Slim::put`, `Slim::patch`, and `Slim::delete`
- * is an anonymous function.
- */
+require_once 'near_config.php';
+require_once 'near_ven.php';
+require_once 'near_auth.php';
+require_once 'near_session.php';
 
-// GET Venues
-$app->get(
-    '/venues/:type/:q/:lat/:lng',
-    function ($type,$q,$lat,$lng) use ($app) {
-      global $near_config;
-      require_once("Slim/Helper/FoursquareApi.php");
-      // Set your client key and secret
-      $client_key = $near_config['client_key'];
-      $client_secret = $near_config['client_secret'];
-
-      $foursquare = new FoursquareApi($client_key,$client_secret);
-      
-      // Prepare parameters
-      $params = array("ll"=>"$lat,$lng","query"=>"$q");
-      
-      // Perform a request to a public resource
-      $response = $foursquare->GetPublic("venues/".$type,$params);
-      $app->response()->header("Content-Type", "application/json");
-      echo $response;
-    }
-);
-
-// GET Venue Detail
-$app->get(
-    '/venue/:id',
-    function ($id) use ($app) {
-      global $near_config;
-      require_once("Slim/Helper/FoursquareApi.php");
-      // Set your client key and secret
-      $client_key = $near_config['client_key'];
-      $client_secret = $near_config['client_secret'];
-
-      $foursquare = new FoursquareApi($client_key,$client_secret);
-      
-      // Perform a request to a public resource
-      $response = $foursquare->GetPublic("venues/".$id);
-      $app->response()->header("Content-Type", "application/json");
-      echo $response;
-    }
-);
+$user_id = NULL;
 
 /**
- * Step 4: Run the Slim application
- *
- * This method should be called last. This executes the Slim application
- * and returns the HTTP response to the HTTP client.
+ * Verifying required params posted or not
  */
+function verifyRequiredParams($required_fields,$request_params) {
+    $error = false;
+    $error_fields = "";
+    foreach ($required_fields as $field) {
+        if (!isset($request_params->$field) || strlen(trim($request_params->$field)) <= 0) {
+            $error = true;
+            $error_fields .= $field . ', ';
+        }
+    }
+
+    if ($error) {
+        // Required field(s) are missing or empty
+        // echo error json and stop the app
+        $response = array();
+        $app = \Slim\Slim::getInstance();
+        $response["status"] = "error";
+        $response["message"] = 'Required field(s) ' . substr($error_fields, 0, -2) . ' is missing or empty';
+        echoResponse(200, $response);
+        $app->stop();
+    }
+}
+
+
+function echoResponse($status_code, $response) {
+    $app = \Slim\Slim::getInstance();
+    // Http response code
+    $app->status($status_code);
+
+    // setting response content type to json
+    $app->contentType('application/json');
+
+    echo json_encode($response);
+}
+
+
 $app->run();
