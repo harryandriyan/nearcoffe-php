@@ -47,14 +47,14 @@ NearCoffeeApp.config(['$routeProvider',
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.authenticated = false;
             Data.get('session').then(function (results) {
-                if (results.uid) {
+                if (results.nc_uid) {
                     $rootScope.authenticated = true;
-                    $rootScope.uid = results.uid;
-                    $rootScope.name = results.name;
-                    $rootScope.email = results.email;
+                    $rootScope.nc_uid = results.nc_uid;
+                    $rootScope.nc_name = results.nc_name;
+                    $rootScope.nc_email = results.nc_email;
                 } else {
                     var nextUrl = next.$$route.originalPath;
-                    if (nextUrl == '/signup' || nextUrl == '/login') {
+                    if (nextUrl == '/register' || nextUrl == '/login') {
 
                     } else {
                         $location.path("/login");
