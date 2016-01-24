@@ -19,6 +19,10 @@ NearCoffeeApp.config(['$routeProvider',
         templateUrl: 'tmp/login.html',
         controller: 'LoginCtrl'
       }).
+      when('/logout', {
+        templateUrl: 'tmp/logout.html',
+        controller: 'LogoutCtrl'
+      }).
       when('/register', {
         templateUrl: 'tmp/register.html',
         controller: 'RegisterCtrl'
