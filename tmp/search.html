@@ -60,6 +60,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="tile-wrap">
+			<h3 align="center" ng-if="query">Search {{query}} </h3>
 				<div class="tile tile-collapse" ng-repeat="ven in venues">
 					<div class="tile-toggle" data-target="#tile-collapse-{{$index+1}}" data-toggle="tile">
 						<div class="tile-action" data-ignore="tile">
