@@ -1,11 +1,12 @@
 var NearCoffeeAppCtrl = angular.module('NearCoffeeAppCtrl', []);
 
-NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope) { 
+NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope, $rootScope) { 
 
 });
 
-NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $location, $http, Data) { 
+NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $rootScope, $location, $http, Data) { 
 	$scope.login = {};
+	$rootScope.nc_uid = undefined;
     $scope.doLogin = function (customer) {
         Data.post('login', {
             customer: customer
@@ -18,8 +19,30 @@ NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $location, $http, Da
     };
 });
 
-NearCoffeeAppCtrl.controller('RegisterCtrl', function ($scope) { 
+NearCoffeeAppCtrl.controller('RegisterCtrl', function ($scope, $rootScope, $location, $http, Data) { 
+	$rootScope.nc_uid = undefined;
+	$scope.register = {email:'',password:'',name:''};
+    $scope.doregister = function (customer) {
+        Data.post('register', {
+            customer: customer
+        }).then(function (results) {
+            Data.toast(results);
+            if (results.status == "success") {
+                $location.path('login');
+            }
+        });
+    };
+});
 
+NearCoffeeAppCtrl.controller('LogoutCtrl', function ($scope, $rootScope, $location, $http, Data) { 
+	$scope.logout = function () {
+        Data.get('logout').then(function (results) {
+            Data.toast(results);
+            $location.path('login');
+        });
+    }
+    $rootScope.nc_uid = undefined;
+    $scope.logout();
 });
 
 NearCoffeeAppCtrl.controller('SearchCtrl', function ($scope, $http) {
