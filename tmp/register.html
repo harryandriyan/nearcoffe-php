@@ -16,7 +16,7 @@
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
 								<label class="floating-label" for="float-name">Name</label>
-								<input class="form-control" id="name" ng-model="name" type="text">
+								<input class="form-control" name="register" id="registername" ng-model="register.name" type="text" required/>
 							</div>
 						</div>
 					</fieldset>
@@ -24,7 +24,7 @@
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
 								<label class="floating-label" for="float-email">Email</label>
-								<input class="form-control" id="email" ng-model="email" type="text">
+								<input class="form-control" name="register" id="registeremail" ng-model="register.email" type="text" required>
 							</div>
 						</div>
 					</fieldset>
@@ -32,14 +32,14 @@
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
 								<label class="floating-label" for="float-password">Password</label>
-								<input class="form-control" id="pasword" ng-model="pasword" type="text">
+								<input class="form-control" name="register" id="registerpasword" ng-model="register.password" type="password" required>
 							</div>
 						</div>
 					</fieldset>
 					<fieldset>
 						<div class="row">
 							<div class="col-lg-6 col-sm-6">
-								<a ng-click="doregister()" class="btn btn-alt waves-button waves-effect waves-light">Register Now</a>
+								<a ng-click="doregister(register)" class="btn btn-alt waves-button waves-effect waves-light">Register Now</a>
 								<a href="#/login">Have an account ? Login</a>
 							</div>
 						</div>
