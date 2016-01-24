@@ -18,7 +18,7 @@ $app->post('/login', function() use ($app) {
     $email = $r->customer->email;
 
     $db = new PDO("sqlite:db/neardb.sqlite");
-    $sql = $db->prepare("SELECT * FROM user WHERE email='".$email."' AND password='".md5($password)."'");
+    $sql = $db->prepare("SELECT * FROM user WHERE email='".$email."'");
     $sql->execute(); 
     $user = $sql->fetch();
 
@@ -48,34 +48,38 @@ $app->post('/login', function() use ($app) {
     echoResponse(200, $response);
     $db = null;
 });
-/*$app->post('/signUp', function() use ($app) {
+$app->post('/register', function() use ($app) {
     $response = array();
     $r = json_decode($app->request->getBody());
     verifyRequiredParams(array('email', 'name', 'password'),$r->customer);
-    require_once 'passwordHash.php';
-    $db = new DbHandler();
-    $phone = $r->customer->phone;
+    
+    $db = new PDO("sqlite:db/neardb.sqlite");
+
     $name = $r->customer->name;
     $email = $r->customer->email;
-    $address = $r->customer->address;
     $password = $r->customer->password;
-    $isUserExists = $db->getOneRecord("select 1 from customers_auth where phone='$phone' or email='$email'");
+
+    $sql = $db->prepare("select 1 from user where email='".$email."'");
+    $sql->execute(); 
+    $isUserExists = $sql->fetch();
+
     if(!$isUserExists){
-        $r->customer->password = passwordHash::hash($password);
-        $tabble_name = "customers_auth";
-        $column_names = array('phone', 'name', 'email', 'password', 'city', 'address');
-        $result = $db->insertIntoTable($r->customer, $column_names, $tabble_name);
-        if ($result != NULL) {
+        $en_password = md5($password);
+
+        $sql_insert = $db->prepare("INSERT INTO user(name,email,password) VALUES('".$name."', '".$email."', '".$en_password."')");
+
+        if ($sql_insert->execute() != NULL) {
             $response["status"] = "success";
             $response["message"] = "User account created successfully";
-            $response["uid"] = $result;
+            $response["id"] = $result;
             if (!isset($_SESSION)) {
                 session_start();
             }
-            $_SESSION['uid'] = $response["uid"];
-            $_SESSION['phone'] = $phone;
-            $_SESSION['name'] = $name;
-            $_SESSION['email'] = $email;
+
+            $_SESSION['nc_uid'] = $response["id"];
+            $_SESSION['nc_email'] = $name;
+            $_SESSION['nc_name'] = $email;
+
             echoResponse(200, $response);
         } else {
             $response["status"] = "error";
@@ -87,7 +91,7 @@ $app->post('/login', function() use ($app) {
         $response["message"] = "An user with the provided phone or email exists!";
         echoResponse(201, $response);
     }
-});*/
+});
 $app->get('/logout', function() {
     $n_session = new near_session();
     $session = $n_session->destroySession();
