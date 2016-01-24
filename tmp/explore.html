@@ -38,6 +38,7 @@
 <div class="content-inner" ng-controller="ExploreCtrl">
 	<div class="container">
 		<div class="row">
+			<h3 align="center" ng-show="!loading">Recomenden Places in {{location}}</h3>
 			<div class="tile-wrap" ng-repeat="venue in venues">
 				<div class="tile tile-collapse" ng-repeat="recomended in venue.items">
 					<div class="tile-toggle" data-target="#tile-collapse-{{$index+1}}" data-toggle="tile">
