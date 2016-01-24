@@ -39,12 +39,12 @@
 	<header class="header">
 		<a class="header-logo" href="#/home">NearCoffee</a>
 		<ul class="nav nav-list pull-right">
-			<!-- <li>
+			<li ng-if="nc_uid">
 				<a data-toggle="menu" href="#profile">
-					<span class="access-hide">John Smith</span>
-					<span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="images/users/avatar-001.jpg"></span>
+					<span class="access-hide">{{nc_email}}</span>
+					<span class="avatar avatar-sm"><img alt="alt text for {{nc_email}} avatar" src="images/users/avatar-001.jpg"></span>
 				</a>
-			</li> -->
+			</li>
 		</ul>
 	</header>
 	<nav class="menu menu-right" id="profile">
@@ -55,10 +55,10 @@
 						<img alt="John Smith" src="images/samples/landscape.jpg">
 					</div>
 					<div class="menu-top-info">
-						<a class="menu-top-user" href="javascript:void(0)"><span class="avatar pull-left"><img alt="alt text for John Smith avatar" src="images/users/avatar-001.jpg"></span>John Smith</a>
+						<a class="menu-top-user" href="javascript:void(0)"><span class="avatar pull-left"><img alt="alt text for John Smith avatar" src="images/users/avatar-001.jpg"></span>{{nc_name}}</a>
 					</div>
 					<div class="menu-top-info-sub">
-						<small>Some additional information about John Smith</small>
+						<small>{{nc_email}}</small>
 					</div>
 				</div>
 				<div class="menu-content">
@@ -70,7 +70,7 @@
 							<a href="javascript:void(0)"><span class="icon icon-lg">add_to_photos</span>My Venues</a>
 						</li>
 						<li>
-							<a href="page-login.html"><span class="icon icon-lg">exit_to_app</span>Logout</a>
+							<a href="#/logout"><span class="icon icon-lg">exit_to_app</span>Logout</a>
 						</li>
 					</ul>
 				</div>
@@ -82,7 +82,7 @@
 	</div>
 	<footer class="footer">
 		<div class="container">
-			<p>NearCoffee</p>
+			<p>NearCoffee <img ng-src="images/thirdparty/poweredby-black-4s.png" width="20%"> </p>
 		</div>
 	</footer>
 
