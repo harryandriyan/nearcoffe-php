@@ -72,6 +72,7 @@ NearCoffeeAppCtrl.controller('ExploreCtrl', function ($scope, $http) {
 		$http.get(
 			'server/venues/explore/coffee/'+lat+'/'+lng+''
 		).success(function(response){
+			$scope.location = response.response.headerFullLocation;
 			$scope.venues = response.response.groups;
 			$scope.loading = undefined;
 		});
