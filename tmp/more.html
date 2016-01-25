@@ -1,9 +1,26 @@
+<style type="text/css">
+	.photo {
+		display: inline;
+		float: left;
+		padding: 10px;
+	}
+	.bggreen {
+		background-color: #8bc34a;
+	}
+	.bgred {
+		background-color: #f44336;
+	}
+</style>
 <div ng-controller="MoreDetailCtrl">
 	<div class="content-heading">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6 col-lg-push-3 col-sm-10 col-sm-push-1">
-					<h1 class="heading">{{venue.name}}</h1>
+				<div class="col-lg-8 col-lg-push-3 col-sm-12 col-sm-push-1">
+					<h1 class="heading">
+						{{venue.name}}
+						<span ng-if="venue.hours.isOpen" class="bggreen"><i>Open Now</i></span>
+						<span ng-if="!venue.hours.isOpen" class="bgred"><i>Close Now</i></span>
+					</h1>
 				</div>
 			</div>
 		</div>
@@ -11,8 +28,17 @@
 </div>
 <div class="content-inner" ng-controller="MoreDetailCtrl">
 	<div class="container container-full">
-		<div class="row row-fix">
-			<div class="col-md-3 content-fix">
+		<div class="row" align="center">
+			<div class="col-md-12">
+				<div ng-repeat="photos in venue.photos.groups">
+					<div ng-repeat="photo in photos.items">
+						<img class="photo" ng-src="{{photo.prefix}}180{{photo.suffix}}" alt="{{photo.user.firstName}}" title="{{photo.user.firstName}}">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 content-fix">
 				<div class="content-fix-scroll">
 					<div class="content-fix-wrap">
 						<div class="content-fix-inner">
@@ -24,7 +50,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<h2 class="content-sub-heading">Description</h2>
 				<p><span ng-repeat="category in venue.categories" class="light-green darken-4-text">{{category.name}}, </span> <br></p>
 				<p>{{venue.location.address}}, {{venue.location.city}}, {{venue.location.country}}</p>
@@ -37,20 +63,6 @@
 		    	<p>
 		    		{{venue.description}}
 		    	</p>
-			</div>
-			<div class="col-md-3 content-fix">
-				<div class="content-fix-scroll">
-					<div class="content-fix-wrap">
-						<div class="content-fix-inner">
-							<h2 class="content-sub-heading">Images</h2>
-							<ul ng-repeat="photos in venue.photos.groups">
-								<li ng-repeat="photo in photos.items">
-									<img ng-src="{{photo.prefix}}180{{photo.suffix}}" alt="{{photo.user.firstName}}" title="{{photo.user.firstName}}">
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

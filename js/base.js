@@ -12,6 +12,12 @@
 		contentPadding = parseInt($('.content').css('padding-bottom').replace('px', ''));
 	};
 
+	$(document).ready(function() {
+		$("#open-right-menu").click(function() {
+			$("#menu-right").addClass('open');
+		});
+	});
+
 	$(window).on('scroll', function() {
 		$('.content-fix').each(function(index) {
 			if ($(this).outerHeight() < $(this).closest('.row-fix').outerHeight()) {

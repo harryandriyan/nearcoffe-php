@@ -9,7 +9,7 @@ $app->get('/session', function() {
 });
 
 $app->post('/login', function() use ($app) {
-
+    $near_db = new near_query_handler();
     $r = json_decode($app->request->getBody());
     verifyRequiredParams(array('email', 'password'),$r->customer);
     $response = array();
@@ -17,10 +17,7 @@ $app->post('/login', function() use ($app) {
     $password = $r->customer->password;
     $email = $r->customer->email;
 
-    $db = new PDO("sqlite:db/neardb.sqlite");
-    $sql = $db->prepare("SELECT * FROM user WHERE email='".$email."'");
-    $sql->execute(); 
-    $user = $sql->fetch();
+    $user = $near_db->getOneRecord("select * from user where email='$email'");
 
         if ($user != NULL) {
             if( $user['password']==md5($password) ){
@@ -53,22 +50,21 @@ $app->post('/register', function() use ($app) {
     $r = json_decode($app->request->getBody());
     verifyRequiredParams(array('email', 'name', 'password'),$r->customer);
     
-    $db = new PDO("sqlite:db/neardb.sqlite");
+    $near_db = new near_query_handler();
 
     $name = $r->customer->name;
     $email = $r->customer->email;
     $password = $r->customer->password;
 
-    $sql = $db->prepare("select 1 from user where email='".$email."'");
-    $sql->execute(); 
-    $isUserExists = $sql->fetch();
+    $isUserExists = $near_db->getOneRecord("select 1 from user where email='$email'");
 
     if(!$isUserExists){
-        $en_password = md5($password);
+        $r->customer->password =md5($password);
+        $tabble_name = "user";
+        $column_names = array('name', 'email', 'password');
+        $result = $near_db->insertIntoTable($r->customer, $column_names, $tabble_name);
 
-        $sql_insert = $db->prepare("INSERT INTO user(name,email,password) VALUES('".$name."', '".$email."', '".$en_password."')");
-
-        if ($sql_insert->execute() != NULL) {
+        if ($result != NULL) {
             $response["status"] = "success";
             $response["message"] = "User account created successfully";
             $response["id"] = $result;

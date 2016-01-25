@@ -6,7 +6,6 @@ NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope, $rootScope) {
 
 NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $rootScope, $location, $http, Data) { 
 	$scope.login = {};
-	$rootScope.nc_uid = undefined;
     $scope.doLogin = function (customer) {
         Data.post('login', {
             customer: customer
@@ -28,7 +27,7 @@ NearCoffeeAppCtrl.controller('RegisterCtrl', function ($scope, $rootScope, $loca
         }).then(function (results) {
             Data.toast(results);
             if (results.status == "success") {
-                $location.path('login');
+                $location.path('home');
             }
         });
     };

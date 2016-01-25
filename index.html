@@ -40,7 +40,7 @@
 		<a class="header-logo" href="#/home">NearCoffee</a>
 		<ul class="nav nav-list pull-right">
 			<li ng-if="nc_uid">
-				<a data-toggle="menu" href="#profile">
+				<a data-toggle="menu" href="#profile" style="cursor: pointer" id="open-right-menu">
 					<span class="access-hide">{{nc_email}}</span>
 					<span class="avatar avatar-sm"><img alt="alt text for {{nc_email}} avatar" src="images/users/avatar-001.jpg"></span>
 				</a>
@@ -89,7 +89,7 @@
 </body>
 <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
 	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/base.min.js"></script>
+	<script src="js/base.js"></script>
 	<!-- ANGULAR -->
 	  <script src="js/angular/angular.min.js"></script>
 	  <script src="js/angular/angular-animate.min.js"></script>

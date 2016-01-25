@@ -22,10 +22,12 @@ require 'Slim/Slim.php';
  */
 $app = new \Slim\Slim();
 
-require_once 'near_config.php';
-require_once 'near_ven.php';
 require_once 'near_auth.php';
+require_once 'near_config.php';
+require_once 'near_connect.php';
+require_once 'near_query_handler.php';
 require_once 'near_session.php';
+require_once 'near_ven.php';
 
 $user_id = NULL;
 
