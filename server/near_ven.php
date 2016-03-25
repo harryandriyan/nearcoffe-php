@@ -44,3 +44,57 @@ $app->get(
       echo $response;
     }
 );
+
+//save venue
+$app->post('/savevenue', function() use ($app) {
+    session_start();
+    $response = array();
+    $r = json_decode($app->request->getBody());
+
+    $r->foursquare_id = $venId = $r->venId;
+    $r->name = $venName = $r->venName;
+    $r->user_id = $user_id = $_SESSION['nc_uid'];
+    $table_name = "venue";
+    
+    $near_db = new near_query_handler();
+
+    $isVenueSaved = $near_db->getOneRecord("select 1 from ".$table_name." where foursquare_id='".$venId."' and user_id='".$user_id."'");
+    
+    if(!$isVenueSaved) {
+
+        $column_names = array('foursquare_id','name', 'user_id');
+        $result = $near_db->insertIntoTable($r, $column_names, $table_name);
+
+        if ($result != NULL) {
+            $response["status"] = "success";
+            $response["message"] = "Venue Saved";
+            echoResponse(200, $response);
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Failed to save Venue. Please try again";
+            echoResponse(201, $response);
+        }
+    }
+    else {
+        $response["status"] = "info";
+        $response["message"] = "The Venue already saved";
+        echoResponse(201, $response);
+    }
+});
+
+//delete venue
+$app->post('/deletevenue', function() use ($app) {
+    $response = array();
+    $r = json_decode($app->request->getBody());
+
+    $id = $r->id;
+    $table_name = "venue";
+    
+    $near_db = new near_query_handler();
+    $do_delete = $near_db->deleteRecord("delete from ".$table_name." where id='".$id."'");
+    if ($do_delete) {
+        $response["status"] = "info";
+        $response["message"] = "The Venue was deleted";
+        echoResponse(201, $response);
+    }
+});

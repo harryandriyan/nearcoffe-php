@@ -4,12 +4,31 @@ NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope, $rootScope) {
 
 });
 
-NearCoffeeAppCtrl.controller('ProfileCtrl', function ($scope, $rootScope) { 
-
-});
-
-NearCoffeeAppCtrl.controller('MyvenuesCtrl', function ($scope, $rootScope) { 
-
+NearCoffeeAppCtrl.controller('ProfileCtrl', function ($scope, $http, Data) { 
+	$scope.getProfile = function(){
+			$http.get(
+				'server/profile'
+			).success(function(response){
+				$scope.profile = response;
+		});
+	}
+	$scope.getVenues = function(){
+		$http.get(
+			'server/getvenuesbyuser'
+		).success(function(response){
+			$scope.venues = response;
+		});
+	}
+	$scope.deletevenue = function (venId) {
+        Data.post('deletevenue', {
+            id: venId
+        }).then(function (results) {
+            Data.toast(results);
+            $scope.getVenues();
+        });
+	}
+	$scope.getProfile();
+	$scope.getVenues();
 });
 
 NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $rootScope, $location, $http, Data) { 
@@ -124,9 +143,10 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope,$routeParams, $r
 		    }
 		}).addTo(map);
 	}
-    $scope.savevenue = function (venId) {
+    $scope.savevenue = function (venId, venName) {
         Data.post('savevenue', {
-            venId: venId
+            venId: venId,
+            venName: venName
         }).then(function (results) {
             Data.toast(results);
         });

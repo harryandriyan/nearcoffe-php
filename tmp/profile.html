@@ -1,1 +1,44 @@
-profile page
+<div class="content-heading" ng-controller="ProfileCtrl">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-lg-push-3 col-sm-10 col-sm-push-1">
+				<h1 class="heading">{{profile.name}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content-inner" ng-controller="ProfileCtrl">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 content-fix">
+				<h3 align="center">{{profile.name}} ( {{profile.email}} )</h3>
+			</div>
+			<div class="col-md-5 content-fix">
+				<h3 align="center">Your Venues</h3>
+				<div class="tile-wrap">
+					<div class="tile" ng-repeat="venue in venues">
+						<div class="tile-side pull-left">
+							<div class="avatar avatar-sm avatar-brand">
+								<span class="icon">maps</span>
+							</div>
+						</div>
+						<div class="tile-action tile-action-show">
+							<ul class="nav nav-list margin-no pull-right">
+								<li>
+									<a class="text-black-sec waves-attach" target="_blank" href="#/more/{{venue.foursquare_id}}"><span class="icon">launch</span></a>
+								</li>
+								<li>
+									<a class="text-black-sec waves-attach" ng-click="deletevenue(venue.id)"><span class="icon">delete</span></a>
+								</li>
+							</ul>
+						</div>
+						<div class="tile-inner">
+							<span class="text-overflow">{{venue.name}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

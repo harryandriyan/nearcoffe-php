@@ -88,41 +88,23 @@ $app->post('/register', function() use ($app) {
         echoResponse(200, $response);
     }
 });
-$app->post('/savevenue', function() use ($app) {
+$app->get('/profile', function() {
     session_start();
-    $response = array();
-    $r = json_decode($app->request->getBody());
-    
+    $user_id = $_SESSION['nc_uid'];
     $near_db = new near_query_handler();
+    $user = $near_db->getOneRecord("select * from user where id='$user_id'");
 
-    $r->foursquare_id = $venId = $r->venId;
-    $r->user_id = $user_id = $_SESSION['nc_uid'];
-    $table_name = "venue";
-    
+    echoResponse(200, $user);
+});
+$app->get('/getvenuesbyuser', function() {
+    session_start();
+    $user_id = $_SESSION['nc_uid'];
     $near_db = new near_query_handler();
-
-    $isVenueSaved = $near_db->getOneRecord("select 1 from ".$table_name." where foursquare_id='".$venId."' and user_id='".$user_id."'");
-    
-    if(!$isVenueSaved) {
-
-        $column_names = array('foursquare_id', 'user_id');
-        $result = $near_db->insertIntoTable($r, $column_names, $table_name);
-
-        if ($result != NULL) {
-            $response["status"] = "success";
-            $response["message"] = "Venue Saved";
-            echoResponse(200, $response);
-        } else {
-            $response["status"] = "error";
-            $response["message"] = "Failed to save Venue. Please try again";
-            echoResponse(201, $response);
-        }
-    }
-    else {
-        $response["status"] = "error";
-        $response["message"] = "The Venue already saved";
-        echoResponse(201, $response);
-    }
+    $venue = $near_db->getRecords("select * from venue where user_id='$user_id'");
+    $data = array(
+            'venue'=>$venue
+        );
+    echoResponse(200, $venue);
 });
 $app->get('/logout', function() {
     $n_session = new near_session();

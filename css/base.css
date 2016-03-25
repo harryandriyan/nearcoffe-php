@@ -7,6 +7,9 @@
 @-ms-viewport {
   width: device-width;
 }
+a {
+  cursor: pointer;
+}
 article,
 aside,
 footer,

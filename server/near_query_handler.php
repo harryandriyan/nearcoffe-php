@@ -17,6 +17,33 @@ class near_query_handler {
         return $result = $r->fetch_assoc();    
     }
     /**
+     * Delete single record
+     */
+    public function deleteRecord($query) {
+        $r = $this->conn->prepare($query) or die($this->conn->error.__LINE__);
+        return $result = $r->execute();    
+    }
+    /**
+     * Fetching multiple record
+     */
+    public function getRecords($query) {
+        $result = array();
+        $row = array();
+        $r = $this->conn->query($query) or die($this->conn->error.__LINE__);
+        while($result = $r->fetch_array()) {
+            $row[] = array(
+                    "id"=> $result['id'],
+                    "name"=> $result['name'],
+                    "foursquare_id"=> $result['foursquare_id'],
+                    "user_id"=> $result['user_id'],
+                    "note"=> $result['note'],
+                    "status"=> $result['status'],
+                    "saved"=> $result['saved']
+                );
+        }
+        return $row;
+    }
+    /**
      * Creating new record
      */
     public function insertIntoTable($obj, $column_names, $table_name) {
