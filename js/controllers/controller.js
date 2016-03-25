@@ -4,6 +4,14 @@ NearCoffeeAppCtrl.controller('HomeCtrl', function ($scope, $rootScope) {
 
 });
 
+NearCoffeeAppCtrl.controller('ProfileCtrl', function ($scope, $rootScope) { 
+
+});
+
+NearCoffeeAppCtrl.controller('MyvenuesCtrl', function ($scope, $rootScope) { 
+
+});
+
 NearCoffeeAppCtrl.controller('LoginCtrl', function ($scope, $rootScope, $location, $http, Data) { 
 	$scope.login = {};
     $scope.doLogin = function (customer) {
@@ -85,7 +93,7 @@ NearCoffeeAppCtrl.controller('ExploreCtrl', function ($scope, $http) {
 });
 
 
-NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope, $http, $routeParams) {
+NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope,$routeParams, $rootScope, $location, $http, Data) {
 	$scope.getDetailVenue = function(){
 			$http.get(
 				'server/venue/'+$routeParams.venId+''
@@ -98,15 +106,10 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope, $http, $routePa
 		L.mapbox.accessToken = 'pk.eyJ1IjoiaGFycnlhbmRyaXlhbiIsImEiOiJwbGwyUjlRIn0.AcL2qL6fWTzaXNJNSFRu0g';
 		var map = L.mapbox.map('map', 'mapbox.streets')
 		    .setView([venue.location.lat, venue.location.lng], 16);
-
 		L.mapbox.featureLayer({
-		    // this feature is in the GeoJSON format: see geojson.org
-		    // for the full specification
 		    type: 'Feature',
 		    geometry: {
 		        type: 'Point',
-		        // coordinates here are in longitude, latitude order because
-		        // x, y is the standard for GeoJSON and many formats
 		        coordinates: [
 		          venue.location.lng,
 		          venue.location.lat
@@ -115,13 +118,18 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope, $http, $routePa
 		    properties: {
 		        title: venue.name,
 		        description: venue.location.address+', '+venue.location.city+', '+venue.location.country,
-		        // one can customize markers by adding simplestyle properties
-		        // https://www.mapbox.com/guides/an-open-platform/#simplestyle
 		        'marker-size': 'large',
 		        'marker-color': '#BE9A6B',
 		        'marker-symbol': 'cafe'
 		    }
 		}).addTo(map);
+	}
+    $scope.savevenue = function (venId) {
+        Data.post('savevenue', {
+            venId: venId
+        }).then(function (results) {
+            Data.toast(results);
+        });
 	}
 	$scope.getDetailVenue();
 });

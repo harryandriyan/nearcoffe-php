@@ -27,6 +27,14 @@ NearCoffeeApp.config(['$routeProvider',
         templateUrl: 'tmp/register.html',
         controller: 'RegisterCtrl'
       }).
+      when('/profile', {
+        templateUrl: 'tmp/profile.html',
+        controller: 'ProfileCtrl'
+      }).
+      when('/myvenues', {
+        templateUrl: 'tmp/myvenues.html',
+        controller: 'MyvenuesCtrl'
+      }).
       when('/search', {
         templateUrl: 'tmp/search.html',
         controller: 'SearchCtrl'

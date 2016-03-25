@@ -38,45 +38,19 @@
 	</div>
 	<header class="header">
 		<a class="header-logo" href="#/home">NearCoffee</a>
-		<ul class="nav nav-list pull-right">
-			<li ng-if="nc_uid">
-				<a data-toggle="menu" href="#profile" style="cursor: pointer" id="open-right-menu">
-					<span class="access-hide">{{nc_email}}</span>
-					<span class="avatar avatar-sm"><img alt="alt text for {{nc_email}} avatar" src="images/users/avatar-001.jpg"></span>
-				</a>
+		<ul class="nav nav-list pull-right" ng-if="nc_uid">
+			<li>
+				<a href="#/profile">Profile</a>
+			</li>
+			<li>
+				<a href="#/myvenues">My Venues</a>
+			</li>
+			<li>
+				<a href="#/logout">Log Out</a>
 			</li>
 		</ul>
 	</header>
-	<nav class="menu menu-right" id="profile">
-		<div class="menu-scroll">
-			<div class="menu-wrap">
-				<div class="menu-top">
-					<div class="menu-top-img">
-						<img alt="John Smith" src="images/samples/landscape.jpg">
-					</div>
-					<div class="menu-top-info">
-						<a class="menu-top-user" href="javascript:void(0)"><span class="avatar pull-left"><img alt="alt text for John Smith avatar" src="images/users/avatar-001.jpg"></span>{{nc_name}}</a>
-					</div>
-					<div class="menu-top-info-sub">
-						<small>{{nc_email}}</small>
-					</div>
-				</div>
-				<div class="menu-content">
-					<ul class="nav">
-						<li>
-							<a href="javascript:void(0)"><span class="icon icon-lg">account_box</span>Profile Settings</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)"><span class="icon icon-lg">add_to_photos</span>My Venues</a>
-						</li>
-						<li>
-							<a href="#/logout"><span class="icon icon-lg">exit_to_app</span>Logout</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
+	
 	<div class="content" ng-view>
 		
 	</div>

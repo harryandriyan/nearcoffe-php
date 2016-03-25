@@ -24,7 +24,7 @@ class near_session {
 
     public function destroySession(){
         if (!isset($_SESSION)) {
-        session_start();
+            session_start();
         }
         if(isSet($_SESSION['nc_uid']))
         {

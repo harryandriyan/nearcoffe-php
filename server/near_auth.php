@@ -60,9 +60,9 @@ $app->post('/register', function() use ($app) {
 
     if(!$isUserExists){
         $r->customer->password =md5($password);
-        $tabble_name = "user";
+        $table_name = "user";
         $column_names = array('name', 'email', 'password');
-        $result = $near_db->insertIntoTable($r->customer, $column_names, $tabble_name);
+        $result = $near_db->insertIntoTable($r->customer, $column_names, $table_name);
 
         if ($result != NULL) {
             $response["status"] = "success";
@@ -85,6 +85,42 @@ $app->post('/register', function() use ($app) {
     }else{
         $response["status"] = "error";
         $response["message"] = "An user with the provided phone or email exists!";
+        echoResponse(200, $response);
+    }
+});
+$app->post('/savevenue', function() use ($app) {
+    session_start();
+    $response = array();
+    $r = json_decode($app->request->getBody());
+    
+    $near_db = new near_query_handler();
+
+    $r->foursquare_id = $venId = $r->venId;
+    $r->user_id = $user_id = $_SESSION['nc_uid'];
+    $table_name = "venue";
+    
+    $near_db = new near_query_handler();
+
+    $isVenueSaved = $near_db->getOneRecord("select 1 from ".$table_name." where foursquare_id='".$venId."' and user_id='".$user_id."'");
+    
+    if(!$isVenueSaved) {
+
+        $column_names = array('foursquare_id', 'user_id');
+        $result = $near_db->insertIntoTable($r, $column_names, $table_name);
+
+        if ($result != NULL) {
+            $response["status"] = "success";
+            $response["message"] = "Venue Saved";
+            echoResponse(200, $response);
+        } else {
+            $response["status"] = "error";
+            $response["message"] = "Failed to save Venue. Please try again";
+            echoResponse(201, $response);
+        }
+    }
+    else {
+        $response["status"] = "error";
+        $response["message"] = "The Venue already saved";
         echoResponse(201, $response);
     }
 });
