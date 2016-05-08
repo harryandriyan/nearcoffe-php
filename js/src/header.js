@@ -1,22 +1,12 @@
-// header
-	var $header = $('.header'),
-	    headerHeight,
-	    headerNavMinWidth = 0;
+// header waterfall
+	$(function () {
+		'use strict';
 
-// header affix
-	$(window).on('scroll', function() {
-		if ($('.header').length) {
-			if (window.pageYOffset > headerHeight) {
-				$header.addClass('fixed');
-			} else {
-				$header.removeClass('fixed');
-			}
-		};
+		$('.header-waterfall').each(function () {
+			$(this).affix({
+				offset: {
+					top: 1
+				}
+			});
+		});
 	});
-
-// header height
-	headerHeightCal = function () {
-		if ($('.header').length) {
-			headerHeight = $header.height();
-		};
-	}

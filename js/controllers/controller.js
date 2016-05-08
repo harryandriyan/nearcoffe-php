@@ -151,5 +151,22 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope,$routeParams, $r
             Data.toast(results);
         });
 	}
+	$scope.addComment = function (comment,venue_id) {
+		Data.post('addcomment', {
+            comment: comment,
+            venue_id: venue_id
+        }).then(function (results) {
+            Data.toast(results);
+            comment = '';
+        });
+	}
+	$scope.getComments = function(){
+			$http.get(
+				'server/getcomments/'+$routeParams.venId+''
+			).success(function(response){
+				$scope.comments = response.comments;
+		});
+	}
+	$scope.getComments();
 	$scope.getDetailVenue();
 });
