@@ -13,4 +13,4 @@ Explore
 ![alt text](http://s32.postimg.org/klyio4sp1/explore_nc.png "Explore NearCoffee")
 
 Detail Venue
-![alt text](http://s32.postimg.org/klyio4sp1/explore_nc.png "Detail Venue NearCoffee")
+![alt text](http://s32.postimg.org/e68e0dumd/detail_nc.png "Detail Venue NearCoffee")
