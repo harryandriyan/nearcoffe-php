@@ -4801,14 +4801,14 @@ body.el-loading {
 }
 
 .btn-alt {
-  background-color: #ba8c01;
+  background-color: #989505;
   color: #ffffff;
 }
 .btn-alt:active, .btn-alt:focus, .btn-alt:hover {
   color: #ffffff;
 }
 .btn-alt[disabled], fieldset[disabled] .btn-alt {
-  background-color: #ba8c01;
+  background-color: #989505;
 }
 
 .btn-blue {
@@ -7968,7 +7968,7 @@ input[type="checkbox"]:checked + .switch-toggle-yellow:after, input[type="radio"
   border: 1px solid #e0e0e0;
   line-height: 24px;
   padding: 12px 16px 11px;
-  vertical-align: top;
+  /*vertical-align: top;*/
 }
 .table td.nowrap,
 .table th.nowrap {
@@ -8424,7 +8424,7 @@ input[type="checkbox"]:checked + .switch-toggle-yellow:after, input[type="radio"
 }
 
 .content-heading {
-  background-color: #ba8c01;
+  background-color: #BAB601;
   color: #ffffff;
   overflow: hidden;
   padding-top: 48px;
@@ -8504,7 +8504,7 @@ input[type="checkbox"]:checked + .switch-toggle-yellow:after, input[type="radio"
 .header {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  background-color: #ba8c01;
+  background-color: #989505;
   color: #ffffff;
   position: fixed;
   top: 0;
@@ -8523,7 +8523,7 @@ input[type="checkbox"]:checked + .switch-toggle-yellow:after, input[type="radio"
   clear: both;
 }
 .header.fixed, .header.open {
-  background-color: #81640D;
+  background-color: #989505;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
 }
 .header a {
