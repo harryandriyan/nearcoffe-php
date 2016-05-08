@@ -8665,7 +8665,7 @@ input[type="checkbox"]:checked + .switch-toggle-yellow:after, input[type="radio"
 }
 .header-logo img, .menu-logo img {
   display: block;
-  max-height: 28px;
+  max-height: 40px;
   width: auto;
 }
 
