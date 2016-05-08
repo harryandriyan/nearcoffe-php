@@ -7,3 +7,10 @@ The Repository of NearCoffe. NearCoffe is simple app that help you to find Coffe
 2. Install database by executing sql file
 3. setting the Application
 4. done
+
+# Screenshot
+Explore
+![alt text](http://s32.postimg.org/klyio4sp1/explore_nc.png "Explore NearCoffee")
+
+Detail Venue
+![alt text](http://s32.postimg.org/klyio4sp1/explore_nc.png "Detail Venue NearCoffee")
