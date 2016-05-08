@@ -18,8 +18,8 @@
 				<div class="col-lg-8 col-lg-push-3 col-sm-12 col-sm-push-1">
 					<h1 class="heading">
 						{{venue.name}}
-						<span ng-if="venue.hours.isOpen" class="bggreen"><i>Open Now</i></span>
-						<span ng-if="!venue.hours.isOpen" class="bgred"><i>Close Now</i></span>
+						<span ng-if="venue.popular.isOpen" class="bggreen"><i>Open Now</i></span>
+						<span ng-if="!venue.popular.isOpen" class="bgred"><i>Close Now</i></span>
 					</h1>
 				</div>
 			</div>
@@ -38,17 +38,27 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 content-fix">
-				<div class="content-fix-scroll">
-					<div class="content-fix-wrap">
-						<div class="content-fix-inner">
-							<h2 class="content-sub-heading">Maps</h2>
-							<div class="tile-wrap">
-								<div id="map" style="height: 300px !important;"></div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="col-md-4">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>Days</td>
+							<td>Open Time</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="schedule in venue.popular.timeframes">
+							<td>{{schedule.days}}</td>
+							<td>
+								<ol>
+									<li ng-repeat="opentime in schedule.open">
+										{{opentime.renderedTime}}
+									</li>
+								</ol>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="col-md-4">
 				<h2 class="content-sub-heading">Description</h2>
@@ -63,6 +73,51 @@
 		    	<p>
 		    		{{venue.description}}
 		    	</p>
+			</div>
+			<div class="col-md-4 content-fix">
+				<div class="content-fix-scroll">
+					<div class="content-fix-wrap">
+						<div class="content-fix-inner">
+							<h2 class="content-sub-heading">Maps</h2>
+							<div class="tile-wrap">
+								<div id="map" style="height: 300px !important;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="content-sub-heading">Review and Comments</h2>
+				<div class="card" ng-repeat="comment in comments">
+					<div class="card-main">
+						<div class="card-inner">
+							<p class="card-heading">{{comment.user_name}}</p>
+							<p>{{comment.comment_data}}</p>
+							<small>at {{comment.comment_date}}</small>
+						</div>
+					</div>
+				</div>
+				<div class="form-group form-group-label form-group-alt control-highlight">
+					<form class="form">
+						<fieldset>
+							<div class="row">
+								<div class="col-lg-6 col-sm-6">
+									<label class="floating-label" for="float-comment">Comment</label>
+									<textarea class="form-control" id="comment" ng-model="comment"></textarea>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="row">
+								<div class="col-lg-6 col-sm-6">
+									<a ng-click="addComment(comment,venue.id)" class="btn btn-alt waves-button waves-effect waves-light">Comment</a>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
