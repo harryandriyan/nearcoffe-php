@@ -157,7 +157,8 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope,$routeParams, $r
             venue_id: venue_id
         }).then(function (results) {
             Data.toast(results);
-            comment = '';
+            $scope.comment = '';
+            $scope.getComments();
         });
 	}
 	$scope.getComments = function(){
