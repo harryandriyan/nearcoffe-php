@@ -98,3 +98,44 @@ $app->post('/deletevenue', function() use ($app) {
         echoResponse(201, $response);
     }
 });
+
+//add comment
+$app->post('/addcomment', function() use ($app) {
+    session_start();
+    $response = array();
+    $r = json_decode($app->request->getBody());
+
+    $r->user_id = $user_id = $_SESSION['nc_uid'];
+    $r->venue_id = $venue_id = $r->venue_id;
+    $r->comment_data = $comment = $r->comment;
+    $table_name = "comment";
+    
+    $near_db = new near_query_handler();
+
+    $column_names = array('user_id','venue_id','comment_data');
+    $result = $near_db->insertIntoTable($r, $column_names, $table_name);
+
+    if ($result != NULL) {
+        $response["status"] = "success";
+        $response["message"] = "Comment added successfully";
+        echoResponse(200, $response);
+    } else {
+        $response["status"] = "error";
+        $response["message"] = "Failed to add comment";
+        echoResponse(201, $response);
+    }
+});
+
+// GET Comments
+$app->get(
+    '/getcomments/:id',
+    function ($id) use ($app) {
+      $near_db = new near_query_handler();
+      $comments = $near_db->getComments($id);
+      
+      $app->response()->header("Content-Type", "application/json");
+      $response["venue"] = $id;
+      $response["comments"] = $comments;
+      echoResponse(200, $response);
+    }
+);

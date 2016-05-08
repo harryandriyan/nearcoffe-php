@@ -43,6 +43,26 @@ class near_query_handler {
         }
         return $row;
     }
+
+    public function getComments($id) {
+        $result = array();
+        $row = array();
+        $r = $this->conn->query('
+            SELECT comment.*, user.name as name FROM comment LEFT JOIN user ON user.id=comment.user_id WHERE venue_id="'.$id.'"'
+        )
+        or die($this->conn->error.__LINE__);
+        while($result = $r->fetch_array()) {
+            $row[] = array(
+                    "comment_id"=> $result['comment_id'],
+                    "user_id"=> $result['user_id'],
+                    "user_name"=> $result['name'],
+                    "venue_id"=> $result['venue_id'],
+                    "comment_data"=> $result['comment_data'],
+                    "comment_date"=> $result['comment_date']
+                );
+        }
+        return $row;
+    }
     /**
      * Creating new record
      */
