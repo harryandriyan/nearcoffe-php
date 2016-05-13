@@ -10,7 +10,10 @@ The Repository of NearCoffe. NearCoffe is simple app that help you to find Coffe
 
 # Screenshot
 Explore
-![alt text](http://s32.postimg.org/klyio4sp1/explore_nc.png "Explore NearCoffee")
+![alt text](http://s32.postimg.org/pnhd4f139/Near_Coffee_explore.png "Explore NearCoffee")
 
 Detail Venue
-![alt text](http://s32.postimg.org/e68e0dumd/detail_nc.png "Detail Venue NearCoffee")
+![alt text](http://s32.postimg.org/acc5hjt51/Near_Coffee_detail.png "Detail Venue NearCoffee")
+
+Profile Page
+![alt text](http://s32.postimg.org/o9pq941tx/Near_Coffee_profile.png "Detail Venue NearCoffee")
