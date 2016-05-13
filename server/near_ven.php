@@ -139,3 +139,21 @@ $app->get(
       echoResponse(200, $response);
     }
 );
+
+//delete comment
+$app->post('/deletecomment',
+  function () use ($app) {
+    $r = json_decode($app->request->getBody());
+    $comment_id = $r->comment_id;
+    $near_db = new near_query_handler();
+    $deletecomment = $near_db->deleteRecord("DELETE FROM comment WHERE comment_id=".$comment_id);
+
+    if ($deletecomment) {
+      $app->response()->header("Content-Type", "application/json");
+      $response["id"] = $comment_id;
+      $response["message"] = "Comment Deleted";
+      echoResponse(200, $response);
+    }
+  }
+
+);
