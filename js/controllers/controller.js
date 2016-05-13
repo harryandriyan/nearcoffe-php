@@ -119,6 +119,7 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope,$routeParams, $r
 			).success(function(response){
 				$scope.venue = response.response.venue;
 				$scope.loadMap($scope.venue);
+				$scope.nc_uid = $rootScope.nc_uid;
 		});
 	}
 	$scope.loadMap = function (venue) {
@@ -155,6 +156,15 @@ NearCoffeeAppCtrl.controller('MoreDetailCtrl', function ($scope,$routeParams, $r
 		Data.post('addcomment', {
             comment: comment,
             venue_id: venue_id
+        }).then(function (results) {
+            Data.toast(results);
+            $scope.comment = '';
+            $scope.getComments();
+        });
+	}
+	$scope.deletecomment = function (id) {
+		Data.post('deletecomment', {
+            comment_id: id,
         }).then(function (results) {
             Data.toast(results);
             $scope.comment = '';
