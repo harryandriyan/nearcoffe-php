@@ -94,6 +94,11 @@
 					<div class="card-main">
 						<div class="card-inner">
 							<p class="card-heading">{{comment.user_name}}</p>
+							<span>
+								<a ng-if="nc_uid==comment.user_id" ng-click="deletecomment(comment.comment_id)" class="btn btn-red btn-green btn-alt waves-button waves-effect waves-light">
+								<span class="fbtn-ori icon">delete</span>
+								</a>
+							<span>
 							<p>{{comment.comment_data}}</p>
 							<small>at {{comment.comment_date}}</small>
 						</div>
